@@ -8,7 +8,7 @@ def test():
     return {"Test": "Done"}
 
 
-@app.predict("/predict")
+@app.get("/predict")
 def prdict():
-    pre = "mirror"
+    pre = {"result": "Hot dog"}
     return pre
