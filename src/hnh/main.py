@@ -4,6 +4,7 @@ from fastapi import Request
 from typing import Union
 from transformers import pipeline
 from hnh.utils import get_max_label
+import os
 import random
 
 app = FastAPI()
@@ -22,6 +23,7 @@ def hotdog():
     pre = ("Not Hotdog", "Hotdog")
     return random.choice(pre)
 
+
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile):
     # 파일 저장
@@ -39,5 +41,4 @@ async def create_upload_file(file: UploadFile):
     if score >= 0.8:
         return {"prediction": p, "label": "hot dog"}
     else:
-        return {"label": "not hot dog",
-                }
+        return {"label": "not hot dog"}
