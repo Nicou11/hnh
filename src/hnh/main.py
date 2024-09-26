@@ -1,7 +1,12 @@
 from fastapi import FastAPI
-
+from fastapi.templating import Jinja2Templates
+from fastapi import Request
+from typing import Union
+from transformers import pipeline
+import random
 
 app = FastAPI()
+
 
 @app.get("/")
 def test():
@@ -9,6 +14,7 @@ def test():
 
 
 @app.get("/predict")
-def prdict():
-    pre = {"result": "Hot dog"}
-    return pre
+def hotdog():
+    model = pipeline("image-classification", model="julien-c/hotdog-not-hotdog")
+    pre = ("Not Hotdog", "Hotdog")
+    return random.choice(pre)
