@@ -3,6 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi import Request
 from typing import Union
 from transformers import pipeline
+from hnh.utils import get_max_score
 import random
 
 app = FastAPI()
@@ -32,6 +33,7 @@ async def create_upload_file(file: UploadFile):
     model = pipeline("image-classification", model="julien-c/hotdog-not-hotdog")
 
     from PIL import Image
+    import io
     img = Image.open(io.BytesIO(img)) # 이미지 byte를 PIL 이미지로 변환
 
     p = model(img)
